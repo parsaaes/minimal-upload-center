@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --surface: #ffffff;
+    --surface-dim: #f8fafc;
+    --outline: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #94a3b8;
+    --success: #10b981;
+    --error: #ef4444;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--surface-dim);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+/* App Bar */
+.app-bar {
+    background: var(--primary);
+    color: white;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.app-bar h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* Card */
+.card {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    width: calc(100% - 32px);
+    margin: 24px auto;
+    overflow: hidden;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--outline);
+    position: relative;
+    background: var(--surface-dim);
+}
+
+.tab {
+    flex: 1;
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: color 0.2s ease;
+    position: relative;
+    user-select: none;
+}
+
+.tab:hover {
+    color: var(--primary);
+}
+
+.tab.active {
+    color: var(--primary);
+}
+
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background: var(--primary);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tab panels */
+.tab-panel {
+    display: none;
+    padding: 32px 12px;
+    animation: fadeIn 0.2s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Upload area */
+.upload-area {
+    border: 2px dashed var(--outline);
+    border-radius: 12px;
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--surface);
+}
+
+.upload-area:hover {
+    border-color: var(--primary-light);
+    background: rgba(99, 102, 241, 0.02);
+}
+
+.upload-area:active {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.04);
+}
+
+.upload-area p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.upload-area p strong {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+}
+
+#fileInput {
+    display: none;
+}
+
+/* File list */
+.file-list {
+    margin-top: 24px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--outline);
+    transition: background 0.2s ease;
+}
+
+.file-item:hover {
+    background: var(--surface-dim);
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-name {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 4px;
+    background: var(--outline);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+}
+
+.file-status {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.file-status.success {
+    color: var(--success);
+}
+
+.file-status.error {
+    color: var(--error);
+}
+
+/* Download tab */
+.download-list {
+    margin-top: 8px;
+}
+
+.download-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 6px;
+    border-bottom: 1px solid var(--outline);
+    transition: background 0.2s ease;
+}
+
+.download-item:hover {
+    background: var(--surface-dim);
+}
+
+.download-item:last-child {
+    border-bottom: none;
+}
+
+.download-item .file-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.download-item .file-name {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 6px;
+}
+
+.download-item .file-size {
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.download-item .file-time {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+}
+
+.download-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.download-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+.download-btn:active {
+    transform: scale(0.98);
+}
+
+.download-btn:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-tertiary);
+}
+
+.empty-state p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .card {
+        width: calc(100% - 16px);
+        margin: 16px auto;
+        border-radius: 8px;
+    }
+
+    .tab {
+        padding: 14px 16px;
+        font-size: 12px;
+    }
+
+    .tab-panel {
+        padding: 24px 16px;
+    }
+
+    .upload-area {
+        padding: 32px 16px;
+    }
+
+    .download-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-left: 8px;
+    }
+}

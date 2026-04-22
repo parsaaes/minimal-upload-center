@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Center</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <div class="app-bar">
+        <h1>Upload Center</h1>
+    </div>
+
+    <div class="card">
+        <div class="tabs">
+            <button class="tab" id="upload-tab">Upload</button>
+            <button class="tab" id="download-tab">Download</button>
+            <div class="tab-indicator" id="tabIndicator"></div>
+        </div>
+
+        <div class="tab-panel" id="upload-panel">
+            <div class="upload-area" id="uploadArea">
+                <p><strong>Click to select files</strong></p>
+                <p>You can upload any file type</p>
+                <input type="file" id="fileInput" multiple>
+            </div>
+            <div class="file-list" id="fileList"></div>
+        </div>
+
+        <div class="tab-panel" id="download-panel">
+            <div class="download-list" id="downloadList"></div>
+        </div>
+    </div>
+
+    <script src="/scripts/tus.min.js"></script>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
