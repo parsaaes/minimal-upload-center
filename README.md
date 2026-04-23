@@ -2,7 +2,7 @@
 Spin up a quick upload center for basic use cases.
 
 ## Prerequisites
-- Golang (Only if you want to build it yoursled)
+- Golang (Only if you want to build it yourself)
 
 ## Quick Start
 
