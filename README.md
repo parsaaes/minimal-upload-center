@@ -6,7 +6,7 @@ Spin up a quick upload center for basic use cases.
 
 ## Quick Start
 
-### Build it yourslef
+### Build it yourself
 ```bash
 go run main.go
 ```
