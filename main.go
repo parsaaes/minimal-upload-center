@@ -35,6 +35,10 @@ type fileEntry struct {
 	Modified int64  `json:"modified"`
 }
 
+type noteRequest struct {
+	Content string `json:"content"`
+}
+
 const uploadPath = "./uploads"
 
 func main() {
@@ -89,6 +93,8 @@ func main() {
 	}))
 
 	e.GET("/api/files", listFilesHandler)
+	e.GET("/api/note", getNoteHandler)
+	e.POST("/api/note", saveNoteHandler)
 	e.GET("/healthz", func(c echo.Context) error {
 		return c.String(http.StatusOK, "ok")
 	})
@@ -166,4 +172,36 @@ func listFilesHandler(c echo.Context) error {
 	})
 
 	return c.JSON(http.StatusOK, files)
+}
+
+func getNoteHandler(c echo.Context) error {
+	notePath := filepath.Join(uploadPath, "note.txt")
+	content, err := os.ReadFile(notePath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return c.JSON(http.StatusOK, map[string]string{"content": ""})
+		}
+
+		logrus.WithError(err).Errorf("unable to read note")
+
+		return c.String(http.StatusInternalServerError, "could not read note")
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"content": string(content)})
+}
+
+func saveNoteHandler(c echo.Context) error {
+	var req noteRequest
+	if err := c.Bind(&req); err != nil {
+		return c.String(http.StatusBadRequest, "invalid request body")
+	}
+
+	notePath := filepath.Join(uploadPath, "note.txt")
+	if err := os.WriteFile(notePath, []byte(req.Content), 0600); err != nil {
+		logrus.WithError(err).Errorf("unable to save note")
+
+		return c.String(http.StatusInternalServerError, "could not save note")
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{"status": "saved"})
 }

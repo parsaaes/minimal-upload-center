@@ -15,6 +15,7 @@
         <div class="tabs">
             <button class="tab" id="upload-tab">Upload</button>
             <button class="tab" id="download-tab">Download</button>
+            <button class="tab" id="note-tab">Note</button>
             <div class="tab-indicator" id="tabIndicator"></div>
         </div>
 
@@ -29,6 +30,14 @@
 
         <div class="tab-panel" id="download-panel">
             <div class="download-list" id="downloadList"></div>
+        </div>
+
+        <div class="tab-panel" id="note-panel">
+            <textarea id="noteContent" class="note-textarea" placeholder="Write your note here..."></textarea>
+            <div class="note-actions">
+                <span id="noteSaveStatus" class="note-save-status"></span>
+                <button class="save-btn" id="saveNoteBtn">Save</button>
+            </div>
         </div>
     </div>
 

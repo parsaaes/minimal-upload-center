@@ -77,6 +77,48 @@ if(document.getElementById("download-tab").classList.contains("active")) {
     loadFiles();
 }
 
+// Note
+const noteContent = document.getElementById('noteContent');
+const saveNoteBtn = document.getElementById('saveNoteBtn');
+const noteSaveStatus = document.getElementById('noteSaveStatus');
+
+async function loadNote() {
+    const res = await fetch('/api/note');
+    const data = await res.json();
+    noteContent.value = data.content;
+}
+
+async function saveNote() {
+    saveNoteBtn.disabled = true;
+    noteSaveStatus.textContent = '';
+    try {
+        const res = await fetch('/api/note', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: noteContent.value })
+        });
+        if (res.ok) {
+            noteSaveStatus.textContent = 'Saved';
+            noteSaveStatus.className = 'note-save-status success';
+        } else {
+            noteSaveStatus.textContent = 'Failed to save';
+            noteSaveStatus.className = 'note-save-status error';
+        }
+    } catch {
+        noteSaveStatus.textContent = 'Failed to save';
+        noteSaveStatus.className = 'note-save-status error';
+    } finally {
+        saveNoteBtn.disabled = false;
+        setTimeout(() => { noteSaveStatus.textContent = ''; }, 2000);
+    }
+}
+
+saveNoteBtn.addEventListener('click', saveNote);
+document.getElementById("note-tab").addEventListener('click', loadNote);
+if(document.getElementById("note-tab").classList.contains("active")) {
+    loadNote();
+}
+
 // Upload
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');

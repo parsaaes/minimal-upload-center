@@ -307,6 +307,74 @@ body {
     line-height: 1.6;
 }
 
+/* Note tab */
+.note-textarea {
+    width: 100%;
+    min-height: 240px;
+    padding: 12px;
+    border: 1px solid var(--outline);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--surface);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease;
+    line-height: 1.6;
+}
+
+.note-textarea:focus {
+    border-color: var(--primary);
+}
+
+.note-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.note-save-status {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.note-save-status.success {
+    color: var(--success);
+}
+
+.note-save-status.error {
+    color: var(--error);
+}
+
+.save-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+.save-btn:active {
+    transform: scale(0.98);
+}
+
+.save-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .card {
